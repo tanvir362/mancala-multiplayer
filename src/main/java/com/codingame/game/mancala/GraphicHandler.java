@@ -13,6 +13,10 @@ public class GraphicHandler {
     private Sprite[] cups;
     private Sprite[] no_plates;
 
+    private Sprite[] pots;
+    private Sprite[] pot_no_plates;
+
+
     public void drawBoardElements(){
         for(int i=0; i<12; i++){
             // Placing cups
@@ -32,6 +36,24 @@ public class GraphicHandler {
                     .setX(150 + (i<6 ? (i+1)*CUP_GAPE : (11-i+1)*CUP_GAPE));
         }
 
+        for(int i=0; i<2; i++){
+            // Placing mancala pots
+            pots[i] = graphicEntityModule.createSprite()
+                    .setImage("pot.png")
+                    .setAnchor(0.5)
+                    .setScale(1.5)
+                    .setY(540)
+                    .setX(i==0 ? 120 : 1920-120);
+
+            // Placing posts no plates
+            pot_no_plates[i] = graphicEntityModule.createSprite()
+                    .setImage("no_plate.png")
+                    .setAnchor(0.5)
+                    .setScale(1.5)
+                    .setY(i==0 ? no_plates[11].getY() : no_plates[0].getY())
+                    .setX(i==0 ? 120 : 1920-120);
+
+        }
     }
     public GraphicHandler(GraphicEntityModule graphicEntityModule){
         this.graphicEntityModule = graphicEntityModule;
