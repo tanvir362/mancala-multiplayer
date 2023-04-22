@@ -13,6 +13,8 @@ public class Mancala {
     private  int pot2;
     private boolean gameOver;
 
+    private GraphicHandler graphicHandler;
+
 
     private boolean isInPlayer1Court(int holeIndex){
         return holeIndex>=0 && holeIndex<=5;
@@ -41,7 +43,7 @@ public class Mancala {
         return player1Empty || player2Empty;
     }
 
-    public Mancala(Player player1, Player player2){
+    public Mancala(Player player1, Player player2, GraphicHandler graphicHandler){
         this.player1 = player1;
         this.player2 = player2;
 
@@ -52,6 +54,9 @@ public class Mancala {
         this.pot1 = 0;
         this.pot2 = 0;
         this.currentPlayer = this.player1;
+
+        // Graphic initialization
+        this.graphicHandler = graphicHandler;
     }
 
     public Player getCurrentPlayer(){

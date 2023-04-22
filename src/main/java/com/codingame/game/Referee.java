@@ -1,6 +1,7 @@
 package com.codingame.game;
 import java.util.List;
 
+import com.codingame.game.mancala.GraphicHandler;
 import com.codingame.game.mancala.InvalidActionException;
 import com.codingame.game.mancala.Mancala;
 import com.codingame.gameengine.core.AbstractPlayer.TimeoutException;
@@ -19,7 +20,9 @@ public class Referee extends AbstractReferee {
     @Override
     public void init() {
         // Initialize your game here.
-        game = new Mancala(gameManager.getPlayer(0), gameManager.getPlayer(1));
+        GraphicHandler graphicHandler = new GraphicHandler(graphicEntityModule);
+
+        game = new Mancala(gameManager.getPlayer(0), gameManager.getPlayer(1), graphicHandler);
         for(Player player: gameManager.getActivePlayers()){
             player.sendInputLine(String.valueOf(player.getIndex()+1));
         }
