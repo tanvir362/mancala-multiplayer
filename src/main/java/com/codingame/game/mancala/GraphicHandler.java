@@ -47,7 +47,7 @@ public class GraphicHandler {
                     .setY(i<6 ? ROW1Y : ROW2Y)
                     .setX(150 + (i<6 ? (i+1)*CUP_GAPE : (11-i+1)*CUP_GAPE));
 
-            // Placing cup's count no each plate
+            // Placing cup's count no plate for each cup
             noPlates[i] = graphicEntityModule.createSprite()
                     .setImage("no_plate.png")
                     .setAnchor(0.5)
