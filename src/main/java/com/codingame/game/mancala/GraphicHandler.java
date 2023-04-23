@@ -37,7 +37,7 @@ public class GraphicHandler {
     }
 
 
-    public void drawBoardElements(){
+    private void drawBoardElements(){
         for(int i=0; i<12; i++){
             // Placing cup on board
             cups[i] = graphicEntityModule.createSprite()
