@@ -11,10 +11,10 @@ public class GraphicHandler {
     private static int CUP_GAPE = 230;
 
     private Sprite[] cups;
-    private Sprite[] no_plates;
+    private Sprite[] noPlates;
 
     private Sprite[] pots;
-    private Sprite[] pot_no_plates;
+    private Sprite[] potNoPlates;
 
 
     public void drawBoardElements(){
@@ -28,7 +28,7 @@ public class GraphicHandler {
                     .setX(150 + (i<6 ? (i+1)*CUP_GAPE : (11-i+1)*CUP_GAPE));
 
             // Placing cup's count no each plate
-            no_plates[i] = graphicEntityModule.createSprite()
+            noPlates[i] = graphicEntityModule.createSprite()
                     .setImage("no_plate.png")
                     .setAnchor(0.5)
                     .setScale(1.5)
@@ -46,11 +46,11 @@ public class GraphicHandler {
                     .setX(i==0 ? 120 : 1920-120);
 
             // Placing no plate for each mancala pot
-            pot_no_plates[i] = graphicEntityModule.createSprite()
+            potNoPlates[i] = graphicEntityModule.createSprite()
                     .setImage("no_plate.png")
                     .setAnchor(0.5)
                     .setScale(1.5)
-                    .setY(i==0 ? no_plates[11].getY() : no_plates[0].getY())
+                    .setY(i==0 ? noPlates[11].getY() : noPlates[0].getY())
                     .setX(i==0 ? 120 : 1920-120);
 
         }
@@ -58,9 +58,10 @@ public class GraphicHandler {
     public GraphicHandler(GraphicEntityModule graphicEntityModule){
         this.graphicEntityModule = graphicEntityModule;
         cups = new Sprite[12];
-        no_plates = new Sprite[12];
+        noPlates = new Sprite[12];
         pots = new Sprite[2];
-        pot_no_plates = new Sprite[2];
+        potNoPlates = new Sprite[2];
+        cupStones = new List[14];
 
         drawBackground();
         drawBoardElements();
