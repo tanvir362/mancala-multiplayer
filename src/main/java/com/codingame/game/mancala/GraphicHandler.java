@@ -110,6 +110,11 @@ public class GraphicHandler {
         drawBackground();
         drawBoardElements();
     }
+
+    public void updateCountText(int idx){
+        countTexts[idx].setText(String.valueOf(cupStones[idx].size()));
+    }
+
     public void drawBackground(){
         graphicEntityModule.createSprite()
                 .setImage("background.jpg")
