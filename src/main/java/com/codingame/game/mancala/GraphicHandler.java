@@ -3,6 +3,10 @@ package com.codingame.game.mancala;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
 import com.codingame.gameengine.module.entities.Sprite;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class GraphicHandler {
     private GraphicEntityModule graphicEntityModule;
 
@@ -15,6 +19,22 @@ public class GraphicHandler {
 
     private Sprite[] pots;
     private Sprite[] potNoPlates;
+
+    private List<Sprite>[] cupStones;
+
+    private int randomXOnCup(int cup_idx){
+        int x = cups[cup_idx].getX();
+        int dx = new Random().nextInt(101) - 50;
+
+        return x+dx;
+    }
+
+    private int randomYonCup(int cup_idx){
+        int y = cups[cup_idx].getY();
+        int dy = new Random().nextInt(101) - 50;
+
+        return y+dy;
+    }
 
 
     public void drawBoardElements(){
@@ -34,6 +54,19 @@ public class GraphicHandler {
                     .setScale(1.5)
                     .setY(i<6 ? ROW1Y+180 : ROW2Y-190)
                     .setX(150 + (i<6 ? (i+1)*CUP_GAPE : (11-i+1)*CUP_GAPE));
+
+            // Placing initial stones in each cup
+            cupStones[i] = new ArrayList<>();
+            for(int j=0; j<4; j++){
+                 cupStones[i].add(
+                         graphicEntityModule.createSprite()
+                                 .setImage(String.format("m%d_s.png", j+1))
+                                 .setScale(1.2)
+                                 .setAnchor(0.5)
+                                 .setX(randomXOnCup(i))
+                                 .setY(randomYonCup(i))
+                 );
+            }
         }
 
         for(int i=0; i<2; i++){
