@@ -2,6 +2,7 @@ package com.codingame.game.mancala;
 
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
 import com.codingame.gameengine.module.entities.Sprite;
+import com.codingame.gameengine.module.entities.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class GraphicHandler {
     private Sprite[] potNoPlates;
 
     private List<Sprite>[] cupStones;
+    private Text[] countTexts;
 
     private int randomXOnCup(int cup_idx){
         int x = cups[cup_idx].getX();
@@ -54,6 +56,14 @@ public class GraphicHandler {
                     .setScale(1.5)
                     .setY(i<6 ? ROW1Y+180 : ROW2Y-190)
                     .setX(150 + (i<6 ? (i+1)*CUP_GAPE : (11-i+1)*CUP_GAPE));
+
+            // Placing initial count text
+            countTexts[i] = graphicEntityModule.createText("4")
+                    .setAnchor(0.5)
+                    .setX(noPlates[i].getX())
+                    .setY(noPlates[i].getY())
+                    .setFontSize(50)
+                    .setFillColor(0xffffff);
 
             // Placing initial stones in each cup
             cupStones[i] = new ArrayList<>();
@@ -95,6 +105,7 @@ public class GraphicHandler {
         pots = new Sprite[2];
         potNoPlates = new Sprite[2];
         cupStones = new List[14];
+        countTexts = new Text[14];
 
         drawBackground();
         drawBoardElements();
