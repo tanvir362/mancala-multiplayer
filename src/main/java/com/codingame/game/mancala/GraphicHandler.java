@@ -134,8 +134,10 @@ public class GraphicHandler {
         drawBoardElements();
     }
 
-    public void updateCountText(int idx){
+    public void updateCountText(int idx, double sT){
         countTexts[idx].setText(String.valueOf(cupStones[idx].size()));
+
+        graphicEntityModule.commitEntityState(sT, countTexts[idx]);
     }
 
     public void drawBackground(){
