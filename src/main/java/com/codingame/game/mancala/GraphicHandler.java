@@ -11,9 +11,9 @@ import java.util.Random;
 public class GraphicHandler {
     private GraphicEntityModule graphicEntityModule;
 
-    private static int ROW2Y = 370;
-    private static int ROW1Y = 710;
-    private static int CUP_GAPE = 230;
+    private static final int ROW2Y = 370;
+    private static final int ROW1Y = 710;
+    private static final int CUP_GAPE = 230;
 
     private Sprite[] cups;
     private Sprite[] noPlates;
