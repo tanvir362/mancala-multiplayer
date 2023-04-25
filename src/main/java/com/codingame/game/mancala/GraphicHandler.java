@@ -174,4 +174,28 @@ public class GraphicHandler {
         updateCountText(tCupIdx, tf*(double) (iTh+1));
     }
 
+    public void putAStoneToPot(int fCupIdx, int tPotIdx, int iTh){
+        int tot = cupStones[fCupIdx].size() + iTh;
+        double tf = 1.0/(double) tot;
+
+        Sprite stone = cupStones[fCupIdx].remove(cupStones[fCupIdx].size()-1);
+        updateCountText(fCupIdx, tf*(double) iTh);
+        double originalScale = stone.getScaleX();
+        stone
+                .setX(randomXOnPot(tPotIdx))
+                .setY(randomYonPot(tPotIdx))
+                .setScale(originalScale*5)
+                .setVisible(true)
+                .setAlpha(0);
+        graphicEntityModule.commitEntityState(tf*(double) iTh, stone);
+        stone
+                .setAlpha(1)
+                .setScale(originalScale, Curve.EASE_IN_AND_OUT);
+        graphicEntityModule.commitEntityState(tf*(double) (iTh+1), stone);
+        System.err.println(String.format("%d pot stone size", tPotIdx));
+        System.err.println(cupStones[12+tPotIdx].size());
+        cupStones[12+tPotIdx].add(stone);
+
+        updateCountText(12+tPotIdx, tf*(double) (iTh+1));
+    }
 }
