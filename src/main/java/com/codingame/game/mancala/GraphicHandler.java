@@ -110,6 +110,15 @@ public class GraphicHandler {
                     .setY(i==0 ? noPlates[0].getY() : noPlates[11].getY())
                     .setX(i==0 ? 1920-120 : 120);
 
+            cupStones[12+i] = new ArrayList<>();
+
+            countTexts[12+i] = graphicEntityModule.createText("0")
+                    .setAnchor(0.5)
+                    .setX(potNoPlates[i].getX())
+                    .setY(potNoPlates[i].getY())
+                    .setFontSize(50)
+                    .setFillColor(0xffffff);
+
         }
     }
     public GraphicHandler(GraphicEntityModule graphicEntityModule){
@@ -118,7 +127,7 @@ public class GraphicHandler {
         noPlates = new Sprite[12];
         pots = new Sprite[2];
         potNoPlates = new Sprite[2];
-        cupStones = new List[14];
+        cupStones = new List[14]; // Also keeps pot stones at indexes 12 and 13
         countTexts = new Text[14];
 
         drawBackground();
