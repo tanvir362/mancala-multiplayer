@@ -38,6 +38,20 @@ public class GraphicHandler {
         return y+dy;
     }
 
+    private int randomXOnPot(int idx){
+        int x = pots[idx].getX();
+        int dx = new Random().nextInt(101) - 50;
+
+        return x+dx;
+    }
+
+    private int randomYonPot(int idx){
+        int y = pots[idx].getY();
+        int dy = new Random().nextInt(141) - 70;
+
+        return y+dy;
+    }
+
 
     private void drawBoardElements(){
         for(int i=0; i<12; i++){
