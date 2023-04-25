@@ -73,18 +73,25 @@ public class Mancala {
         if(board[holeIndex]<1) throw new InvalidActionException("Picking from empty hole");
 
         int pick = board[holeIndex];
+//        graphicHandler.pickCupStones(holeIndex);
         board[holeIndex] = 0;
 
         int currentHole = (holeIndex+1)%12;
+        int iThStone = 0;
         while(pick>0){
             if(currentHole==6 && currentPlayer==player1){
                 pot1 += 1;
                 pick -= 1;
 
+                graphicHandler.putAStoneToPot(holeIndex, 0, iThStone);
+                iThStone += 1;
             }
             else if(currentHole==0 && currentPlayer==player2){
                 pot2 += 1;
                 pick -= 1;
+
+                graphicHandler.putAStoneToPot(holeIndex, 1, iThStone);
+                iThStone += 1;
             }
             if(pick == 0){
                 // Last stone dropped into players pot
@@ -93,7 +100,9 @@ public class Mancala {
             }
 
             board[currentHole] += 1;
+            graphicHandler.putAStoneToCup(holeIndex, currentHole, iThStone);
             pick -= 1;
+            iThStone += 1;
 
             if(pick == 0){
                 // Last stone dropped into hole
