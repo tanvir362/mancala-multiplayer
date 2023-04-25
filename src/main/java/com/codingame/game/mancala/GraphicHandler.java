@@ -1,5 +1,6 @@
 package com.codingame.game.mancala;
 
+import com.codingame.gameengine.module.entities.Curve;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
 import com.codingame.gameengine.module.entities.Sprite;
 import com.codingame.gameengine.module.entities.Text;
@@ -149,4 +150,28 @@ public class GraphicHandler {
                 .setX(0)
                 .setY(0);
     }
+
+    public void putAStoneToCup(int fCupIdx, int tCupIdx, int iTh){
+        int tot = cupStones[fCupIdx].size() + iTh;
+        double tf = 1.0/(double) tot;
+
+        Sprite stone = cupStones[fCupIdx].remove(cupStones[fCupIdx].size()-1);
+        updateCountText(fCupIdx, tf*(double) iTh);
+        double originalScale = stone.getScaleX();
+        stone
+                .setX(randomXOnCup(tCupIdx))
+                .setY(randomYonCup(tCupIdx))
+                .setScale(originalScale*5)
+                .setVisible(true)
+                .setAlpha(0);
+        graphicEntityModule.commitEntityState(tf*(double) iTh, stone);
+        stone
+                .setAlpha(1)
+                .setScale(originalScale, Curve.EASE_IN_AND_OUT);
+        graphicEntityModule.commitEntityState(tf*(double) (iTh+1), stone);
+        cupStones[tCupIdx].add(stone);
+
+        updateCountText(tCupIdx, tf*(double) (iTh+1));
+    }
+
 }
