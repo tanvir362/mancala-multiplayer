@@ -100,15 +100,15 @@ public class GraphicHandler {
                     .setAnchor(0.5)
                     .setScale(1.5)
                     .setY(540)
-                    .setX(i==0 ? 120 : 1920-120);
+                    .setX(i==0 ? 1920-120 : 120);
 
             // Placing no plate for each mancala pot
             potNoPlates[i] = graphicEntityModule.createSprite()
                     .setImage("no_plate.png")
                     .setAnchor(0.5)
                     .setScale(1.5)
-                    .setY(i==0 ? noPlates[11].getY() : noPlates[0].getY())
-                    .setX(i==0 ? 120 : 1920-120);
+                    .setY(i==0 ? noPlates[0].getY() : noPlates[11].getY())
+                    .setX(i==0 ? 1920-120 : 120);
 
         }
     }
