@@ -66,6 +66,7 @@ public class Mancala {
     public void playTurn(int hole) throws InvalidActionException{
         if(gameOver) throw new InvalidActionException("Game Over");
         boolean freeTurn = false;
+        boolean captured = false;
 
         int holeIndex = hole-1;
         if(currentPlayer==player1 && !isInPlayer1Court(holeIndex)) throw new InvalidActionException("Invalid hole");
@@ -73,7 +74,7 @@ public class Mancala {
         if(board[holeIndex]<1) throw new InvalidActionException("Picking from empty hole");
 
         int pick = board[holeIndex];
-//        graphicHandler.pickCupStones(holeIndex);
+        graphicHandler.pickCupStones(holeIndex);
         board[holeIndex] = 0;
 
         int currentHole = (holeIndex+1)%12;
@@ -99,27 +100,33 @@ public class Mancala {
                 break;
             }
 
-            board[currentHole] += 1;
-            graphicHandler.putAStoneToCup(holeIndex, currentHole, iThStone);
-            pick -= 1;
-            iThStone += 1;
-
-            if(pick == 0){
-                // Last stone dropped into hole
-                if(board[currentHole]==1 && currentPlayer==player1 && isInPlayer1Court(currentHole) && board[11-currentHole]>=1){
+            if(pick == 1){
+                // Last stone will dropped into hole
+                if(board[currentHole]==0 && currentPlayer==player1 && isInPlayer1Court(currentHole) && board[11-currentHole]>=1){
                     // Captured by player1
-                    pot1 += board[currentHole];
-                    board[currentHole] = 0;
+                    pot1 += 1;
                     pot1 += board[11-currentHole];
                     board[11-currentHole] = 0;
+
+                    graphicHandler.capture(11-currentHole, currentHole, 0);
+                    captured = true;
                 }
-                else if(board[currentHole]==1 && currentPlayer==player2 && isInPlayer2Court(currentHole) && board[11-currentHole]>=1){
+                else if(board[currentHole]==0 && currentPlayer==player2 && isInPlayer2Court(currentHole) && board[11-currentHole]>=1){
                     // Captured by player2
-                    pot2 += board[currentHole];
-                    board[currentHole] = 0;
+                    pot2 += 1;
                     pot2 += board[11-currentHole];
                     board[11-currentHole] = 0;
+
+                    graphicHandler.capture(11-currentHole, currentHole, 1);
+                    captured = true;
                 }
+            }
+
+            if(!captured){
+                board[currentHole] += 1;
+                graphicHandler.putAStoneToCup(holeIndex, currentHole, iThStone);
+                pick -= 1;
+                iThStone += 1;
             }
 
             currentHole += 1;
