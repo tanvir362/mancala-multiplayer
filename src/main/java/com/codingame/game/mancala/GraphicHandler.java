@@ -25,6 +25,8 @@ public class GraphicHandler {
     private List<Sprite>[] cupStones;
     private Text[] countTexts;
 
+    private Sprite ring;
+
     private int randomXOnCup(int cup_idx){
         int x = cups[cup_idx].getX();
         int dx = new Random().nextInt(101) - 50;
@@ -133,6 +135,13 @@ public class GraphicHandler {
 
         drawBackground();
         drawBoardElements();
+        ring = graphicEntityModule.createSprite()
+                .setImage("ring.png")
+                .setScale(1.5)
+                .setAnchor(0.5)
+                .setVisible(false)
+                .setY(500);
+
     }
 
     public void updateCountText(int idx, double sT){
@@ -151,6 +160,15 @@ public class GraphicHandler {
                 .setY(0);
     }
 
+    public void pickCupStones(int cup_idx){
+        ring
+                .setX(cups[cup_idx].getX())
+                .setY(cups[cup_idx].getY())
+                .setVisible(true);
+
+        graphicEntityModule.commitEntityState(0, ring);
+
+    }
     public void putAStoneToCup(int fCupIdx, int tCupIdx, int iTh){
         int tot = cupStones[fCupIdx].size() + iTh;
         double tf = 1.0/(double) tot;
