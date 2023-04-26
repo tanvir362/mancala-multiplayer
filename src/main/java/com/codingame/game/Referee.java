@@ -19,7 +19,13 @@ public class Referee extends AbstractReferee {
 
     @Override
     public void init() {
-        // Initialize your game here.
+        // Initializing game option
+        gameManager.setFirstTurnMaxTime(1000);
+        gameManager.setTurnMaxTime(50);
+        gameManager.setMaxTurns(250);
+        gameManager.setFrameDuration(2000);
+
+        // Initializing game.
         GraphicHandler graphicHandler = new GraphicHandler(graphicEntityModule);
 
         game = new Mancala(gameManager.getPlayer(0), gameManager.getPlayer(1), graphicHandler);
